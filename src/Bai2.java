@@ -340,7 +340,7 @@ public class Bai2 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        addCategoryToDatabase();
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -355,53 +355,7 @@ public class Bai2 extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-     private void addCategoryToDatabase() {
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-
-// Lặp qua từng hàng của JTable để lấy dữ liệu
-        for (int row = 0; row < model.getRowCount(); row++) {
-            // Khởi tạo categoryID với giá trị mặc định
-            int categoryID = 0; // Hoặc giá trị mặc định khác nếu cần
-
-            // Lấy categoryID từ cột 0
-            Object categoryIDObj = model.getValueAt(row, 0);
-            if (categoryIDObj != null) {
-                categoryID = (int) categoryIDObj; // Chuyển đổi kiểu dữ liệu
-            }
-
-            // Lấy categoryName từ cột 1
-            String categoryName = model.getValueAt(row, 1).toString(); // Cột 1 là CategoryName
-
-            // Thêm vào cơ sở dữ liệu SQL
-            insertCategoryToDatabase(categoryID, categoryName);
-        }
-
-    }
-
-    private void insertCategoryToDatabase(int categoryID, String categoryName) {
-        try {
-            // Câu lệnh SQL để thêm một danh mục mới
-            String sql = "INSERT INTO Category (CategoryID, CategoryName) VALUES (?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-
-            // Thiết lập các giá trị cho câu lệnh SQL
-            ps.setInt(1, categoryID);
-            ps.setString(2, categoryName);
-
-            // Thực hiện câu lệnh SQL
-            int rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Thêm danh mục thành công!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Thêm danh mục thất bại.");
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi thêm danh mục: " + ex.getMessage());
-        }
-    }
+     
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
